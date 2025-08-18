@@ -1,4 +1,5 @@
 const fs = require('fs');
+require('dotenv').config();
 
 module.exports = {
   development: {
@@ -39,9 +40,9 @@ module.exports = {
     dialect: 'postgres',
     dialectOptions: {
       bigNumberStrings: true,
-      ssl: {
-        ca: fs.readFileSync(__dirname + '/postgres-ca-main.crt'),
-      },
+    //   ssl: {
+    //     ca: fs.readFileSync(__dirname + '/postgres-ca-main.crt'),
+    //   },
     },
   },
 };
