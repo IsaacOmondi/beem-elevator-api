@@ -1,0 +1,41 @@
+{
+  "name": "beem-elevator-api",
+  "version": "1.0.0",
+  "description": "Beem Tech Challenge - Elevator API. Create an API/application that emulates how an elevator works",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "db:migrate": "npx seqeulize-cli db:migrate",
+    "db:seed": "npx seqeulize-cli db:seed:all",
+    "db:rollback": "npx seqeulize-cli db:migrate:undo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsaacOmondi/beem-elevator-api.git"
+  },
+  "keywords": [
+    "challenge"
+  ],
+  "author": "Isaac Omondi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IsaacOmondi/beem-elevator-api/issues"
+  },
+  "homepage": "https://github.com/IsaacOmondi/beem-elevator-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.7",
+    "uuid": "^11.1.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "sequelize-cli": "^6.6.3"
+  }
+}
