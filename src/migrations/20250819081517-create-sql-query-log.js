@@ -2,39 +2,40 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('SqlQueryLogs', {
+    await queryInterface.createTable('sql_query_logs', {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.STRING(50)
+        type: Sequelize.INTEGER
       },
-      queryText: {
+      query_text: {
         type: Sequelize.TEXT,
         allowNull: false
       },
       parameters: {
         type: Sequelize.JSON
       },
-      executionTimeMs: {
+      execution_time_ms: {
         type: Sequelize.INTEGER
       },
-      rowsReturned: {
+      rows_returned: {
         type: Sequelize.INTEGER
       },
-      callerInfo: {
+      caller_info: {
         type: Sequelize.JSON
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('SqlQueryLogs');
+    await queryInterface.dropTable('sql_query_logs');
   }
 };

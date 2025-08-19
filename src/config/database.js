@@ -13,12 +13,9 @@ module.exports = {
       bigNumberStrings: true,
     },
     logging: false,
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000,
-    },
+    define: {
+        underscored: true,
+    }
   },
   test: {
     username: process.env.CI_DB_USERNAME,
@@ -30,6 +27,9 @@ module.exports = {
     dialectOptions: {
       bigNumberStrings: true,
     },
+    define: {
+        underscored: true,
+    }
   },
   production: {
     username: process.env.PROD_DB_USERNAME,
@@ -44,5 +44,14 @@ module.exports = {
     //     ca: fs.readFileSync(__dirname + '/postgres-ca-main.crt'),
     //   },
     },
+    define: {
+        underscored: true,
+    },
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
   },
 };

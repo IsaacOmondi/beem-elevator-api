@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class ElevatorCall extends Model {
+  class SqlQueryLogs extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,16 +13,17 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  ElevatorCall.init({
-    buildingId: DataTypes.STRING,
-    elevatorId: DataTypes.STRING,
-    fromFloor: DataTypes.INTEGER,
-    toFloor: DataTypes.INTEGER,
-    status: DataTypes.STRING,
-    completedAt: DataTypes.DATE
+  SqlQueryLogs.init({
+    query_text: DataTypes.TEXT,
+    parameters: DataTypes.JSON,
+    execution_time_ms: DataTypes.INTEGER,
+    rows_returned: DataTypes.INTEGER,
+    caller_info: DataTypes.JSON
   }, {
     sequelize,
-    modelName: 'ElevatorCall',
+    modelName: 'SqlQueryLogs',
+    tableName: 'sql_query_logs',
+    underscored: true,
   });
-  return ElevatorCall;
+  return SqlQueryLogs;
 };

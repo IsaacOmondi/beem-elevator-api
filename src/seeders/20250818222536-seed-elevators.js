@@ -12,93 +12,86 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert('Elevators', [
+   await queryInterface.bulkInsert('elevators', [
       // West Park Towers elevators
       {
-        id: 'elevator-1',
-        buildingId: 'building-1',
+        building_id: 1,
         name: 'Elevator A',
-        currentFloor: 1,
-        targetFloor: null,
+        current_floor: 1,
+        target_floor: null,
         state: 'idle',
         direction: 'stationary',
-        doorState: 'closed',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        door_state: 'closed',
+        created_at: new Date(),
+        updated_at: new Date()
       },
       {
-        id: 'elevator-2',
-        buildingId: 'building-1',
+        building_id: 1,
         name: 'Elevator B',
-        currentFloor: 5,
-        targetFloor: null,
+        current_floor: 5,
+        target_floor: null,
         state: 'idle',
         direction: 'stationary',
-        doorState: 'closed',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        door_state: 'closed',
+        created_at: new Date(),
+        updated_at: new Date()
       },
       {
-        id: 'elevator-3',
-        buildingId: 'building-1',
+        building_id: 1,
         name: 'Elevator C',
-        currentFloor: 10,
-        targetFloor: null,
+        current_floor: 10,
+        target_floor: null,
         state: 'idle',
         direction: 'stationary',
-        doorState: 'closed',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        door_state: 'closed',
+        created_at: new Date(),
+        updated_at: new Date()
       },
       // The Oval elevators
       {
-        id: 'elevator-4',
-        buildingId: 'building-2',
+        building_id: 2,
         name: 'Express Elevator',
-        currentFloor: 1,
-        targetFloor: null,
+        current_floor: 1,
+        target_floor: null,
         state: 'idle',
         direction: 'stationary',
-        doorState: 'closed',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        door_state: 'closed',
+        created_at: new Date(),
+        updated_at: new Date()
       },
       {
-        id: 'elevator-5',
-        buildingId: 'building-2',
+        building_id: 2,
         name: 'Local Elevator',
-        currentFloor: 8,
-        targetFloor: null,
+        current_floor: 8,
+        target_floor: null,
         state: 'idle',
         direction: 'stationary',
-        doorState: 'closed',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        door_state: 'closed',
+        created_at: new Date(),
+        updated_at: new Date()
       },
       // Sarit Center elevators
       {
-        id: 'elevator-6',
-        buildingId: 'building-3',
+        building_id: 3,
         name: 'Main Elevator',
-        currentFloor: 1,
-        targetFloor: null,
+        current_floor: 1,
+        target_floor: null,
         state: 'idle',
         direction: 'stationary',
-        doorState: 'closed',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        door_state: 'closed',
+        created_at: new Date(),
+        updated_at: new Date()
       },
       {
-        id: 'elevator-7',
-        buildingId: 'building-3',
-        name: 'Service Elevator',
-        currentFloor: 3,
-        targetFloor: null,
-        state: 'maintenance',
+        building_id: 3,
+        name: 'Side Elevator',
+        current_floor: 5,
+        target_floor: null,
+        state: 'idle',
         direction: 'stationary',
-        doorState: 'closed',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        door_state: 'closed',
+        created_at: new Date(),
+        updated_at: new Date()
       }
     ], {});
   },

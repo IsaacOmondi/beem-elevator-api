@@ -15,12 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Building.init({
     name: DataTypes.STRING,
-    totalFloors: DataTypes.INTEGER,
-    floorTravelTimeSeconds: DataTypes.INTEGER,
-    doorOperationTimeSeconds: DataTypes.INTEGER
+    total_floors: DataTypes.INTEGER,
+    floor_travel_time_seconds: DataTypes.INTEGER,
+    door_operation_time_seconds: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Building',
+    tableName: 'buildings',
+    underscored: true,
   });
   return Building;
 };

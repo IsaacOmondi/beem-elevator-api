@@ -2,17 +2,18 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Elevators', {
+    await queryInterface.createTable('elevators', {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.STRING(50)
+        type: Sequelize.INTEGER
       },
-      buildingId: {
-        type: Sequelize.STRING(50),
+      building_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Buildings',
+          model: 'buildings',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -21,16 +22,16 @@ module.exports = {
       name: {
         type: Sequelize.STRING(100)
       },
-      currentFloor: {
+      current_floor: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 1
+        defaultValue: 0
       },
-      targetFloor: {
+      target_floor: {
         type: Sequelize.INTEGER
       },
       state: {
-        type: Sequelize.ENUM('idle', 'moving_up', 'moving_down', 'doors_opening', 'doors_closing', 'maintenance'),
+        type: Sequelize.ENUM('idle', 'moving_up', 'moving_down', 'doors_opening', 'doors_closing'),
         allowNull: false,
         defaultValue: 'idle'
       },
@@ -39,23 +40,22 @@ module.exports = {
         allowNull: false,
         defaultValue: 'stationary'
       },
-      doorState: {
+      door_state: {
         type: Sequelize.ENUM('open', 'closed', 'opening', 'closing'),
         allowNull: false,
         defaultValue: 'closed'
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
-  
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Elevators');
+    await queryInterface.dropTable('elevators');
   }
 };

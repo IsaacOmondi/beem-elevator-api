@@ -2,22 +2,22 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ElevatorEvents', {
+    await queryInterface.createTable('elevator_events', {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.STRING(50)
+        type: Sequelize.INTEGER
       },
-      elevatorId: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      elevator_id: {
+        type: Sequelize.INTEGER,
         references: {
-          model: 'Elevators',
+          model: 'elevators',
           key: 'id'
         }
       },
-      eventType: {
-        type: Sequelize.STRING,
+      event_type: {
+        type: Sequelize.STRING(50),
         allowNull: false
       },
       floor: {
@@ -26,17 +26,17 @@ module.exports = {
       metadata: {
         type: Sequelize.JSON
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('ElevatorEvents');
+    await queryInterface.dropTable('elevator_events');
   }
 };

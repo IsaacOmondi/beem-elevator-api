@@ -12,32 +12,29 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert('Buildings', [
+   await queryInterface.bulkInsert('buildings', [
     {
-      id: 'building-1',
       name: 'West Park Towers',
-      totalFloors: 13,
-      floorTravelTimeSeconds: 5,
-      doorOperationTimeSeconds: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
+      total_floors: 13,
+      floor_travel_time_seconds: 5,
+      door_operation_time_seconds: 2,
+      created_at: new Date(),
+      updated_at: new Date()
     },
     {
-      id: 'building-2',
       name: 'The Oval',
-      totalFloors: 5,
-      floorTravelTimeSeconds: 3,
-      doorOperationTimeSeconds: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
+      total_floors: 5,
+      floor_travel_time_seconds: 3,
+      door_operation_time_seconds: 1,
+      created_at: new Date(),
+      updated_at: new Date()
     }, {
-      id: 'building-3',
       name: 'Sarit Center',
-      totalFloors: 10,
-      floorTravelTimeSeconds: 4,
-      doorOperationTimeSeconds: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
+      total_floors: 10,
+      floor_travel_time_seconds: 4,
+      door_operation_time_seconds: 2,
+      created_at: new Date(),
+      updated_at: new Date()
     }
    ])
   },

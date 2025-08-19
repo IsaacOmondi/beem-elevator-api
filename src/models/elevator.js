@@ -14,16 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Elevator.init({
-    buildingId: DataTypes.STRING,
+    building_id: DataTypes.STRING,
     name: DataTypes.STRING,
-    currentFloor: DataTypes.INTEGER,
-    targetFloor: DataTypes.INTEGER,
+    current_floor: DataTypes.INTEGER,
+    target_floor: DataTypes.INTEGER,
     state: DataTypes.ENUM,
     direction: DataTypes.ENUM,
-    doorState: DataTypes.ENUM
+    door_state: DataTypes.ENUM
   }, {
     sequelize,
     modelName: 'Elevator',
+    tableName: 'elevators',
+    underscored: true,
   });
   return Elevator;
 };

@@ -2,38 +2,40 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Buildings', {
+    await queryInterface.createTable('buildings', {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.STRING(50)
+        type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING(100)
+        type: Sequelize.STRING(100),
+        allowNull: false
       },
-      totalFloors: {
+      total_floors: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      floorTravelTimeSeconds: {
+      floor_travel_time_seconds: {
         type: Sequelize.INTEGER,
         defaultValue: 5
       },
-      doorOperationTimeSeconds: {
+      door_operation_time_seconds: {
         type: Sequelize.INTEGER,
         defaultValue: 2
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Buildings');
+    await queryInterface.dropTable('buildings');
   }
 };

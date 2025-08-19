@@ -2,32 +2,34 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ElevatorCalls', {
+    await queryInterface.createTable('elevator_calls', {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.STRING(50)
+        type: Sequelize.INTEGER
       },
-      buildingId: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
+      building_id: {
+        type: Sequelize.INTEGER,
         references: {
-          model: 'Buildings',
+          model: 'buildings',
           key: 'id'
         },
+        allowNull: false
       },
-      elevatorId: {
-        type: Sequelize.STRING(50),
+      elevator_id: {
+        type: Sequelize.INTEGER,
         references: {
-          model: 'Elevators',
+          model: 'elevators',
           key: 'id'
-        }
+        },
+        allowNull: false
       },
-      fromFloor: {
+      from_floor: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      toFloor: {
+      to_floor: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
@@ -36,20 +38,20 @@ module.exports = {
         allowNull: false,
         defaultValue: 'pending'
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      completedAt: {
+      completed_at: {
         type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('ElevatorCalls');
+    await queryInterface.dropTable('elevator_calls');
   }
 };
