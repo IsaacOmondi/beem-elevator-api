@@ -20,8 +20,6 @@ const sequelizeLogger = (sql) => {
     query: sql?.substring(0, 200),
     path: currentRequestPath || 'internal'
   });
-
-  console.log('sql', sql && !sql.includes('sql_query_logs'));
   
   // Only log actual queries (skip our own logging queries)
   if (sql && !sql.includes('sql_query_logs')) {

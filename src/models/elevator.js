@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Elevator extends Model {
     /**
@@ -11,6 +10,29 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // An elevator belongs to a building
+      Elevator.belongsTo(models.Building, {
+        foreignKey: 'building_id',
+        as: 'building'
+      });
+      
+      // An elevator has many calls
+      Elevator.hasMany(models.ElevatorCall, {
+        foreignKey: 'elevator_id',
+        as: 'elevator_call'
+      });
+      
+      // An elevator has many events
+      Elevator.hasMany(models.ElevatorEvent, {
+        foreignKey: 'elevator_id',
+        as: 'elevator_event'
+      });
+      
+      // An elevator has many queue items
+      Elevator.hasMany(models.ElevatorQueue, {
+        foreignKey: 'elevator_id',
+        as: 'elevator_queue'
+      });
     }
   }
   Elevator.init({
@@ -18,9 +40,9 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     current_floor: DataTypes.INTEGER,
     target_floor: DataTypes.INTEGER,
-    state: DataTypes.ENUM,
-    direction: DataTypes.ENUM,
-    door_state: DataTypes.ENUM
+    state: DataTypes.ENUM(['idle', 'moving_up', 'moving_down', 'doors_opening', 'doors_closing']),
+    direction: DataTypes.ENUM(['up', 'down', 'stationary']),
+    door_state: DataTypes.ENUM(['open', 'closed', 'opening', 'closing']),
   }, {
     sequelize,
     modelName: 'Elevator',

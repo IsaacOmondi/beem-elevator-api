@@ -11,6 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // An elevator call belongs to a building
+      ElevatorCall.belongsTo(models.Building, {
+        foreignKey: 'building_id',
+        as: 'building'
+      });
+      
+      // An elevator call belongs to an elevator
+      ElevatorCall.belongsTo(models.Elevator, {
+        foreignKey: 'elevator_id',
+        as: 'elevator'
+      });
+      
+      // An elevator call has many queue items
+      ElevatorCall.hasMany(models.ElevatorQueue, {
+        foreignKey: 'call_id',
+        as: 'queueItems'
+      });
     }
   }
   ElevatorCall.init({

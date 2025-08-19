@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+      // An elevator event belongs to an elevator
+      ElevatorEvent.belongsTo(models.Elevator, {
+        foreignKey: 'elevator_id',
+        as: 'elevator'
+      });
     }
   }
   ElevatorEvent.init({

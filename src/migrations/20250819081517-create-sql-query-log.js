@@ -9,31 +9,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      query_text: {
+      sql_query: {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      parameters: {
-        type: Sequelize.JSON
-      },
-      execution_time_ms: {
-        type: Sequelize.INTEGER
-      },
-      rows_returned: {
-        type: Sequelize.INTEGER
-      },
-      caller_info: {
-        type: Sequelize.JSON
+      request_path: {
+        type: Sequelize.STRING(500),
+        allowNull: true
       },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      updated_at: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
+
+    // Add index for performance
+    await queryInterface.addIndex('sql_query_logs', ['created_at']);
+    await queryInterface.addIndex('sql_query_logs', ['request_path']);
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('sql_query_logs');
