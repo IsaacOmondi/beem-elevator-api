@@ -1,5 +1,6 @@
-const fs = require('fs');
 require('dotenv').config();
+
+const { sequelizeLogger } = require('../middleware/sqlLogger');
 
 module.exports = {
   development: {
@@ -12,7 +13,7 @@ module.exports = {
     dialectOptions: {
       bigNumberStrings: true,
     },
-    logging: false,
+    logging: sequelizeLogger,
     define: {
         underscored: true,
     }
@@ -27,6 +28,7 @@ module.exports = {
     dialectOptions: {
       bigNumberStrings: true,
     },
+    logging: sequelizeLogger,
     define: {
         underscored: true,
     }
@@ -44,6 +46,7 @@ module.exports = {
     //     ca: fs.readFileSync(__dirname + '/postgres-ca-main.crt'),
     //   },
     },
+    logging: sequelizeLogger,
     define: {
         underscored: true,
     },
