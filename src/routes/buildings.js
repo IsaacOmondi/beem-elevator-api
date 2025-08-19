@@ -378,7 +378,7 @@ router.post('/:buildingId/elevators/call',
         status: 'assigned'
       });
 
-      // CREATE EVENTS with timing metadata
+       // CREATE EVENTS with timing metadata
       await elevatorEventService.handleCallReceived(
         assignedElevator.id, 
         elevatorCall.id, 
@@ -395,6 +395,17 @@ router.post('/:buildingId/elevators/call',
         toFloor,
         building // Pass building for timing info
       );
+      
+      // If elevator started moving, create movement event
+      if (newState !== 'idle') {
+        await elevatorEventService.handleMovementStarted(
+          assignedElevator.id,
+          assignedElevator.current_floor,
+          fromFloor,
+          newDirection,
+          building
+        );
+      }
       
       // Calculate estimated journey time and log it
       const pickupDistance = Math.abs(assignedElevator.current_floor - fromFloor);
@@ -450,6 +461,14 @@ router.post('/:buildingId/elevators/call',
         buildingId: parseInt(buildingId),
         assignedElevatorId: assignedElevator.id,
         estimatedArrivalTime: estimatedArrivalTime.toISOString(),
+        estimatedTotalJourneyTime: `${estimatedTotalTime} seconds`,
+        elevatorStatus: {
+          currentFloor: assignedElevator.current_floor,
+          targetFloor: fromFloor,
+          state: newState,
+          direction: newDirection,
+          doorState: assignedElevator.door_state
+        },
         status: 'assigned',
         timestamp: new Date().toISOString()
       });
