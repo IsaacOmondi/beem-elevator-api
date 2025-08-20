@@ -369,6 +369,32 @@ router.post('/:buildingId/elevators/call',
         });
       }
       
+      // Calculate elevator direction and state based on where it needs to go
+      let newDirection = 'stationary';
+      let newState = 'idle';
+      let targetFloor = null;
+      
+      // Determine direction to pickup floor
+      if (assignedElevator.current_floor < fromFloor) {
+        newDirection = 'up';
+        newState = 'moving_up';
+        targetFloor = fromFloor;
+      } else if (assignedElevator.current_floor > fromFloor) {
+        newDirection = 'down';
+        newState = 'moving_down';
+        targetFloor = fromFloor;
+      }
+      // If current_floor === fromFloor, elevator stays idle/stationary
+      
+      // Update elevator direction and state if it needs to move
+      if (newState !== 'idle') {
+        await assignedElevator.update({
+          direction: newDirection,
+          state: newState,
+          target_floor: targetFloor
+        });
+      }
+      
       // Create elevator call record
       const elevatorCall = await ElevatorCall.create({
         building_id: buildingId,
@@ -378,7 +404,7 @@ router.post('/:buildingId/elevators/call',
         status: 'assigned'
       });
 
-       // CREATE EVENTS with timing metadata
+      // CREATE EVENTS with timing metadata
       await elevatorEventService.handleCallReceived(
         assignedElevator.id, 
         elevatorCall.id, 
@@ -421,6 +447,9 @@ router.post('/:buildingId/elevators/call',
         fromFloor,
         {
           callId: elevatorCall.id,
+          elevatorCurrentFloor: assignedElevator.current_floor,
+          elevatorDirection: newDirection,
+          elevatorState: newState,
           estimatedTotalTimeSeconds: estimatedTotalTime,
           estimatedPickupTimeSeconds: pickupDistance * building.floor_travel_time_seconds + building.door_operation_time_seconds * 2,
           pickupDistance,
@@ -430,13 +459,15 @@ router.post('/:buildingId/elevators/call',
               phase: 'pickup',
               fromFloor: assignedElevator.current_floor,
               toFloor: fromFloor,
-              estimatedTimeSeconds: pickupDistance * building.floor_travel_time_seconds
+              estimatedTimeSeconds: pickupDistance * building.floor_travel_time_seconds,
+              direction: newDirection
             },
             {
               phase: 'journey',
               fromFloor: fromFloor,
               toFloor: toFloor,
-              estimatedTimeSeconds: journeyDistance * building.floor_travel_time_seconds
+              estimatedTimeSeconds: journeyDistance * building.floor_travel_time_seconds,
+              direction: toFloor > fromFloor ? 'up' : 'down'
             }
           ]
         }
@@ -464,7 +495,7 @@ router.post('/:buildingId/elevators/call',
         estimatedTotalJourneyTime: `${estimatedTotalTime} seconds`,
         elevatorStatus: {
           currentFloor: assignedElevator.current_floor,
-          targetFloor: fromFloor,
+          targetFloor: targetFloor,
           state: newState,
           direction: newDirection,
           doorState: assignedElevator.door_state
