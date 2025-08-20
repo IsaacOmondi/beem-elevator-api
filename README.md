@@ -70,6 +70,10 @@ npm run dev
 npm start
 ```
 
+### 6. Testing
+I am currently struggling with an issue on properly initiating sequelize on the test suite but I have provided a `elevator_api_spec.json` that should allow you to import the collection to your preferred api client (Postman, Insomnia, Bruno etc.) to test out manually. Ensure that the server is running to manually test. 
+
+I have unit tests written for the Elevator Event Service (`tests/elevatorEventService.spec.js`) that can be looked at (but can't be run at present).
 
 ## Troubleshooting
 
