@@ -101,3 +101,5 @@ PORT=3001 npm run dev
 # Reset database if needed
 npm run db:reset
 ```
+
+# 🤦 Ghosted
